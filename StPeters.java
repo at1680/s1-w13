@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class StPeters
 {
-    private Random r = new Random();
+    private Random randGen = new Random ( );
     private double entryFee;
     private int pot = 1;
    
@@ -11,7 +11,11 @@ public class StPeters
     }
     
     public void optimizeEntryFee(){
-        //your code here -- after you write and test runGame() and flip()
+        int total=0;
+        for(int x = 0; x<=1000; x++){
+            total=total+runGame();
+        }
+        System.out.println("The optimized entry fee is " + total*1.0/1000 + " dollars");
     }
     
     public void tester(int howMany){
@@ -29,11 +33,23 @@ public class StPeters
     
     //returns the amount of money you win in the game
     private int runGame(){
-           //your code here
+        int x = flip();
+           pot=1;
+           while (x!=1){
+            pot=pot+2;
+            x = this.flip();
+           }
+
+           return pot;
     }
     
     //code to return a 0 or 1 simulating a flip
     private int flip(){
-        //your code here
-    }    
+        return randGen.nextInt(2);
+    } 
+    
+    public static void main(String[] args){
+      StPeters g = new StPeters(1.0);
+      g.optimizeEntryFee();
+   }
 }
