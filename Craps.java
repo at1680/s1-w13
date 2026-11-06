@@ -23,6 +23,8 @@ public class Craps
             if (target==7){
                 return 0;
             }
+            r.roll();
+            target=r.total();
         }
         return 1;
 
@@ -33,9 +35,9 @@ public class Craps
     {
         int totalWins=0;
     	for (int x=0;x<howMany;x++){
-            totalWins+=play();
+            totalWins=totalWins+play();
         }
-        System.out.println("The odds of winning are " + totalWins/howMany +" percent.");
+        System.out.println("The odds of winning are " + totalWins*1.0/howMany*100 +" percent.");
     }
 
     public static void main(String[] args){
